@@ -1,0 +1,7 @@
+Credits:
+
+WP Alchemy MetaBoxes: https://github.com/farinspace/wpalchemy
+
+Plugin Options Starter Kit: http://wordpress.org/plugins/plugin-options-starter-kit/
+
+Posts to Posts Core: https://github.com/scribu/wp-lib-posts-to-posts

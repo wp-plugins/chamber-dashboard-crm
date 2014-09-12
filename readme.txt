@@ -1,4 +1,4 @@
-=== Chamber Dashboard Business Directory ===
+=== Chamber Dashboard CRM ===
 Contributors: gwendydd
 Tags: Chamber of Commerce, CRM, customer relationship management, contacts, contacts directory
 Donate link: http://chamberdashboard.com/donate

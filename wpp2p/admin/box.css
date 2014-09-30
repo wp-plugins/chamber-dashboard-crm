@@ -226,3 +226,18 @@ body.rtl .p2p-col-create:hover,
 body.rtl .p2p-col-delete:hover {
 	border-left-color: #ddd;
 }
+
+#create-activity label {
+	font-size: 1.2em;
+	display: block;
+	margin-top: 8px;
+}
+
+#create-activity span {
+	display: block;
+	color: #999;
+}
+
+#create-activity textarea {
+	width: 100%;
+}

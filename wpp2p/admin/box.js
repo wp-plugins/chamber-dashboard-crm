@@ -47,16 +47,20 @@
 
   Connections = Backbone.Collection.extend({
     model: Connection,
-    createItemAndConnect: function(title) {
+    createItemAndConnect: function(title, content, date, category) {
       var data, _this = this;
       data = {
         subaction: 'create_post',
-        post_title: title
+        post_title: title,
+        post_content: content,
+        post_date: date,
+        post_category: category
       };
       return this.ajax_request(data, function(response) {
         _this.trigger('create', response);
       });
     },
+
     create: function(candidate) {
       var data, _this = this;
       data = {
@@ -238,6 +242,13 @@
       this.options = options;
       this.createButton = this.$('button');
       this.createInput = this.$(':text');
+
+      //this.createInput = this.$(':text');
+
+      this.createTitle = this.$('.post-title-input');
+      this.createContent = this.$('.post-content-input');
+      this.createDate = this.$('.post-date-input');
+      this.createCategory = this.$('.post-category-input');
     },
     handleReturn: function(ev) {
       if (ev.keyCode === ENTER_KEY) {
@@ -251,15 +262,25 @@
       if (this.createButton.hasClass('inactive')) {
         return false;
       }
-      title = this.createInput.val();
+
+      //title = this.createInput.val();
+      
+      title = this.createTitle.val();
+      content = this.createContent.val();
+      date = this.createDate.val();
+      category = this.createCategory.val();
+
       if (title === '') {
         this.createInput.focus();
         return;
       }
       this.createButton.addClass('inactive');
-      req = this.collection.createItemAndConnect(title);
+      req = this.collection.createItemAndConnect(title, content, date, category);
       req.done(function() {
-        _this.createInput.val('');
+        // _this.createInput.val('');
+        _this.createTitle.val('');
+        _this.createContent.val('');
+        _this.createDate.val('');
         _this.createButton.removeClass('inactive');
       });
     }
@@ -294,7 +315,7 @@
       $tab = jQuery(ev.currentTarget);
       this.$('.wp-tab-bar li').removeClass('wp-tab-active');
       $tab.addClass('wp-tab-active');
-      this.$el.find('.tabs-panel').hide().end().find($tab.data('ref')).show().find(':text').focus();
+      this.$el.find('.tabs-panel').hide().end().find($tab.data('ref')).show().find('.post-title-input').focus();
     },
     afterConnectionAppended: function(response) {
       if ('one' === this.options.cardinality) {

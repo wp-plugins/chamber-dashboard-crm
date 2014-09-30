@@ -113,7 +113,7 @@ class P2P_Box {
 		foreach ( $this->columns as $key => $field ) {
 			$data['thead'][] = array(
 				'column' => $key,
-				'title' => $field->get_title()
+				'title' => $field->get_title(),
 			);
 		}
 
@@ -147,12 +147,27 @@ class P2P_Box {
 			$tab_content = P2P_Mustache::render( 'tab-create-post', array(
 				'title' => $this->labels->add_new_item
 			) );
+			$activity_tab_content = P2P_Mustache::render( 'tab-create-activity', array(
+				'title' => $this->labels->add_new_item,
+				'categories' => $this->get_list_of_categories()
+			) );
 
-			$data['tabs'][] = array(
-				'tab-id' => 'create-post',
-				'tab-title' => $this->labels->new_item,
-				'tab-content' => $tab_content
-			);
+			if($this->ctype->name == 'people_to_activities' && $this->ctype->get_direction() == "from" ) {
+				$data['tabs'][] = array(
+					'tab-id' => 'create-post',
+					'tab-title' => 'New Activity',
+					'tab-content' => $activity_tab_content
+				);
+
+			} else {
+				$data['tabs'][] = array(
+					'tab-id' => 'create-post',
+					'tab-title' => $this->labels->new_item,
+					'tab-content' => $tab_content
+				);	
+			}
+
+
 		}
 
 		$data['show-tab-headers'] = count( $data['tabs'] ) > 1 ? array(true) : false;
@@ -246,8 +261,16 @@ class P2P_Box {
 		$args = array(
 			'post_title' => $_POST['post_title'],
 			'post_author' => get_current_user_id(),
-			'post_type' => $this->ctype->get( 'opposite', 'side' )->first_post_type()
+			'post_type' => $this->ctype->get( 'opposite', 'side' )->first_post_type(),
 		);
+
+		if(isset($_POST['post_date'])) {
+			$args['post_date'] = $_POST['post_date'];
+		}
+
+		if(isset($_POST['post_content'])) {
+			$args['post_content'] = $_POST['post_content'];
+		}
 
 		$from = absint( $_POST['from'] );
 
@@ -266,6 +289,11 @@ class P2P_Box {
 
 		if ( !$from || !$to )
 			die(-1);
+
+		// set the activity category
+		if(isset($_POST['post_category']) && $_POST['post_category'] != '') {
+			wp_set_post_terms($to, $_POST['post_category'], 'activity_category');
+		}
 
 		$p2p_id = $this->ctype->connect( $from, $to );
 
@@ -322,5 +350,14 @@ class P2P_Box {
 
 		return $side->can_create_item();
 	}
+
+	protected function get_list_of_categories() {
+        $args = array(
+            'orderby'           => 'name',
+            'order'             => 'ASC',
+            'hide_empty'        => false,
+        );
+        return get_terms('activity_category', $args);
+    }
 }
 

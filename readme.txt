@@ -16,6 +16,7 @@ Chamber Dashboard CRM is a part of the Chamber Dashboard collection of plugins a
 = With Chamber Dashboard CRM, you can: =
 *   create a database of the people in your organization
 *   if you have the Chamber Dashboard Business Directory installed, you can associate people with businesses and track their role within the business
+*   keep track of people's activities, such as meeting attendance, event attendance, conversations, donations, etc.
 *   people and their information will not be displayed publicly on the site - this is for your organization's internal use
 
 You can learn more at [chamberdashboard.com](http://chamberdashboard.com)
@@ -36,15 +37,15 @@ More features coming soon!  Chamber Dashboard is in the early stages of its deve
 
 1. Navigate to the \'Add New\' in the plugins dashboard
 2. Navigate to the \'Upload\' area
-3. Select `cdash-crm.zip` from your computer
+3. Select `chamber-dashboard-crm.zip` from your computer
 4. Click \'Install Now\'
 5. Activate the plugin in the Plugin dashboard
 
 = Using FTP =
 
-1. Download `cdash-crm.zip`
-2. Extract the `cdash-crm` directory to your computer
-3. Upload the `cdash-crm` directory to the `/wp-content/plugins/` directory
+1. Download `chamber-dashboard-crm.zip`
+2. Extract the `chamber-dashboard-crm` directory to your computer
+3. Upload the `chamber-dashboard-crm` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 
 
@@ -58,40 +59,9 @@ Don't hesitate to [contact me](http://chamberdashboard.com/contact) if you have 
 1. Entering business information
 
 == Changelog ==
-= 1.6.3 =
-* made Business Directory compatible with new Chamber Dashboard CRM plugin
-
-= 1.6.2 =
-* Small bug fixes
-
-= 1.6.1 = 
-* Cleaned up some debugging code
-
-= 1.6 = 
-* Added ability to import business from a CSV
-
-= 1.5 = 
-* Fixed a bunch of debug errors
-* Added export capability
-
-= 1.4 =
-* Fixed bug where locations with "do not display" appeared on map anyway
-* Added business search form
-* other small fixes
-
-= 1.3 = 
-* Created filters to allow use of theme archive pages for business category and membership level
-* Other small fixes
-
-= 1.2 =
-* Added the ability to create custom fields for businesses
-* Bug fixes
 
 = 1.1 =
-* Added Google map to single business view
-* Added shortcode to create map of all businesses
-* Added category and membership level to body and post classes
-* Bug fixes
+* Can now track people's activities
 
 = 1.0 =
 * First release

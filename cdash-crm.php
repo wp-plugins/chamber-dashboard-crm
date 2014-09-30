@@ -3,7 +3,7 @@
 Plugin Name: Chamber Dashboard CRM
 Plugin URI: http://chamberdashboard.com
 Description: Customer Relationship Management for your Chamber of Commerce
-Version: 1.0
+Version: 1.1
 Author: Morgan Kay
 Author URI: http://wpalchemists.com
 */
@@ -69,10 +69,7 @@ add_action('init', 'cdcrm_language_init');
 function cdcrm_business_directory_installed() {
 	if( function_exists( 'cdash_register_cpt_business' ) ) {
 		return true;
-		echo "business directory is active";
-	} else {
-		echo "business directory is not active";
-	}
+	} 
 }
 add_action( 'plugins_loaded', 'cdcrm_business_directory_installed' );
 
@@ -116,50 +113,50 @@ function cdcrm_register_taxonomy_people_category() {
 add_action( 'init', 'cdcrm_register_taxonomy_people_category', 0 );
 
 // Register Custom Taxonomy - Activity Cateogory
-// function cdcrm_register_taxonomy_activity_category() {
+function cdcrm_register_taxonomy_activity_category() {
 
-// 	$labels = array(
-// 		'name'                       => _x( 'Activity Categories', 'Taxonomy General Name', 'cdcrm' ),
-// 		'singular_name'              => _x( 'Activity Category', 'Taxonomy Singular Name', 'cdcrm' ),
-// 		'menu_name'                  => __( 'Activity Category', 'cdcrm' ),
-// 		'all_items'                  => __( 'All Activity Categories', 'cdcrm' ),
-// 		'parent_item'                => __( 'Parent Activity Category', 'cdcrm' ),
-// 		'parent_item_colon'          => __( 'Parent Activity Category:', 'cdcrm' ),
-// 		'new_item_name'              => __( 'New Activity Category Name', 'cdcrm' ),
-// 		'add_new_item'               => __( 'Add New Activity Category', 'cdcrm' ),
-// 		'edit_item'                  => __( 'Edit Activity Category', 'cdcrm' ),
-// 		'update_item'                => __( 'Update Activity Category', 'cdcrm' ),
-// 		'separate_items_with_commas' => __( 'Separate Activity Categories with commas', 'cdcrm' ),
-// 		'search_items'               => __( 'Search Activity Categories', 'cdcrm' ),
-// 		'add_or_remove_items'        => __( 'Add or remove Activity Category', 'cdcrm' ),
-// 		'choose_from_most_used'      => __( 'Choose from the most used Activity Categories', 'cdcrm' ),
-// 		'not_found'                  => __( 'Not Found', 'cdcrm' ),
-// 	);
-// 	$args = array(
-// 		'labels'                     => $labels,
-// 		'hierarchical'               => true,
-// 		'public'                     => true,
-// 		'show_ui'                    => true,
-// 		'show_admin_column'          => false,
-// 		'show_in_nav_menus'          => false,
-// 		'show_tagcloud'              => false,
-// 	);
-// 	register_taxonomy( 'activity_category', array( 'activity' ), $args );
+	$labels = array(
+		'name'                       => _x( 'Activity Categories', 'Taxonomy General Name', 'cdcrm' ),
+		'singular_name'              => _x( 'Activity Category', 'Taxonomy Singular Name', 'cdcrm' ),
+		'menu_name'                  => __( 'Activity Category', 'cdcrm' ),
+		'all_items'                  => __( 'All Activity Categories', 'cdcrm' ),
+		'parent_item'                => __( 'Parent Activity Category', 'cdcrm' ),
+		'parent_item_colon'          => __( 'Parent Activity Category:', 'cdcrm' ),
+		'new_item_name'              => __( 'New Activity Category Name', 'cdcrm' ),
+		'add_new_item'               => __( 'Add New Activity Category', 'cdcrm' ),
+		'edit_item'                  => __( 'Edit Activity Category', 'cdcrm' ),
+		'update_item'                => __( 'Update Activity Category', 'cdcrm' ),
+		'separate_items_with_commas' => __( 'Separate Activity Categories with commas', 'cdcrm' ),
+		'search_items'               => __( 'Search Activity Categories', 'cdcrm' ),
+		'add_or_remove_items'        => __( 'Add or remove Activity Category', 'cdcrm' ),
+		'choose_from_most_used'      => __( 'Choose from the most used Activity Categories', 'cdcrm' ),
+		'not_found'                  => __( 'Not Found', 'cdcrm' ),
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => false,
+		'show_in_nav_menus'          => false,
+		'show_tagcloud'              => false,
+	);
+	register_taxonomy( 'activity_category', array( 'activity' ), $args );
 
-// }
+}
 
-// add_action( 'init', 'cdcrm_register_taxonomy_activity_category', 0 );
+add_action( 'init', 'cdcrm_register_taxonomy_activity_category', 0 );
 
 // Add some default activity categories
-// function cdcrm_default_activity_categories() {
-// 	wp_insert_term( 'Meeting Attendance', 'activity_category' );
-// 	wp_insert_term(	'Event Attendance', 'activity_category' );
-// 	wp_insert_term( 'Conversation', 'activity_category'	);
-// 	wp_insert_term( 'Donation', 'activity_category' );
-// 	wp_insert_term( 'Volunteering', 'activity_category' );
-// }
+function cdcrm_default_activity_categories() {
+	wp_insert_term( 'Meeting Attendance', 'activity_category' );
+	wp_insert_term(	'Event Attendance', 'activity_category' );
+	wp_insert_term( 'Conversation', 'activity_category'	);
+	wp_insert_term( 'Donation', 'activity_category' );
+	wp_insert_term( 'Volunteering', 'activity_category' );
+}
 
-// add_action( 'init', 'cdcrm_default_activity_categories', 10 );
+add_action( 'init', 'cdcrm_default_activity_categories', 10 );
 
 // Register Custom Post Type - Person
 function cdcrm_register_cpt_person() {
@@ -195,7 +192,7 @@ function cdcrm_register_cpt_person() {
 		'menu_icon'           => 'dashicons-nametag',
 		'can_export'          => true,
 		'has_archive'         => true,
-		'exclude_from_search' => false,
+		'exclude_from_search' => true,
 		'publicly_queryable'  => false,
 		'capability_type'     => 'post',
 	);
@@ -206,48 +203,48 @@ function cdcrm_register_cpt_person() {
 add_action( 'init', 'cdcrm_register_cpt_person', 0 );
 
 // Register Custom Post Type - Activity
-// function cdcrm_register_cpt_activity() {
+function cdcrm_register_cpt_activity() {
 
-// 	$labels = array(
-// 		'name'                => _x( 'Activities', 'Post Type General Name', 'cdcrm' ),
-// 		'singular_name'       => _x( 'Activity', 'Post Type Singular Name', 'cdcrm' ),
-// 		'menu_name'           => __( 'Activities', 'cdcrm' ),
-// 		'parent_item_colon'   => __( 'Parent Activity:', 'cdcrm' ),
-// 		'all_items'           => __( 'All Activities', 'cdcrm' ),
-// 		'view_item'           => __( 'View Activity', 'cdcrm' ),
-// 		'add_new_item'        => __( 'Add New Activity', 'cdcrm' ),
-// 		'add_new'             => __( 'Add New', 'cdcrm' ),
-// 		'edit_item'           => __( 'Edit Activity', 'cdcrm' ),
-// 		'update_item'         => __( 'Update Activity', 'cdcrm' ),
-// 		'search_items'        => __( 'Search Activities', 'cdcrm' ),
-// 		'not_found'           => __( 'Not found', 'cdcrm' ),
-// 		'not_found_in_trash'  => __( 'Not found in Trash', 'cdcrm' ),
-// 	);
-// 	$args = array(
-// 		'label'               => __( 'Activity', 'cdcrm' ),
-// 		'description'         => __( 'Activities', 'cdcrm' ),
-// 		'labels'              => $labels,
-// 		'supports'            => array( 'title', 'editor',  ),
-// 		'taxonomies'          => array( 'activity_category' ),
-// 		'hierarchical'        => false,
-// 		'public'              => true,
-// 		'show_ui'             => true,
-// 		'show_in_menu'        => false,
-// 		'show_in_nav_menus'   => false,
-// 		'show_in_admin_bar'   => true,
-// 		'menu_position'       => 5,
-// 		'menu_icon'           => 'dashicons-smiley',
-// 		'can_export'          => true,
-// 		'has_archive'         => true,
-// 		'exclude_from_search' => true,
-// 		'publicly_queryable'  => false,
-// 		'capability_type'     => 'post',
-// 	);
-// 	register_post_type( 'activity', $args );
+	$labels = array(
+		'name'                => _x( 'Activities', 'Post Type General Name', 'cdcrm' ),
+		'singular_name'       => _x( 'Activity', 'Post Type Singular Name', 'cdcrm' ),
+		'menu_name'           => __( 'People\'s Activities', 'cdcrm' ),
+		'parent_item_colon'   => __( 'Parent Activity:', 'cdcrm' ),
+		'all_items'           => __( 'All Activities', 'cdcrm' ),
+		'view_item'           => __( 'View Activity', 'cdcrm' ),
+		'add_new_item'        => __( 'Add New Activity', 'cdcrm' ),
+		'add_new'             => __( 'Add New', 'cdcrm' ),
+		'edit_item'           => __( 'Edit Activity', 'cdcrm' ),
+		'update_item'         => __( 'Update Activity', 'cdcrm' ),
+		'search_items'        => __( 'Search Activities', 'cdcrm' ),
+		'not_found'           => __( 'Not found', 'cdcrm' ),
+		'not_found_in_trash'  => __( 'Not found in Trash', 'cdcrm' ),
+	);
+	$args = array(
+		'label'               => __( 'Activity', 'cdcrm' ),
+		'description'         => __( 'Activities', 'cdcrm' ),
+		'labels'              => $labels,
+		'supports'            => array( 'title', 'editor',  ),
+		'taxonomies'          => array( 'activity_category' ),
+		'hierarchical'        => false,
+		'public'              => false,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'show_in_nav_menus'   => false,
+		'show_in_admin_bar'   => true,
+		'menu_position'       => 5,
+		'menu_icon'           => 'dashicons-clipboard',
+		'can_export'          => true,
+		'has_archive'         => true,
+		'exclude_from_search' => true,
+		'publicly_queryable'  => false,
+		'capability_type'     => 'post',
+	);
+	register_post_type( 'activity', $args );
 
-// }
+}
 
-// add_action( 'init', 'cdcrm_register_cpt_activity', 0 );
+add_action( 'init', 'cdcrm_register_cpt_activity', 0 );
 
 
 // ------------------------------------------------------------------------
@@ -373,28 +370,53 @@ if ( cdcrm_business_directory_installed() ) {
 	add_action( 'p2p_init', 'cdcrm_people_and_businesses' );
 }
 
-// function cdcrm_people_and_activities() {
-//     // create the connection between people and activities
-//     p2p_register_connection_type( array(
-//         'name' => 'people_to_activities',
-//         'from' => 'person',
-//         'to' => 'activity',
-//         'admin_box' => array(
-// 		    'context' => 'advanced'
-// 		  	),
-//         'title' => array(
-// 		    'from' => __( 'This Person\'s Activities', 'cdcrm' ),
-// 		    'to' => __( 'Person', 'cdcrm' )
-// 		  	),
-//         'to_labels' => array(
-// 			'singular_name' => __( 'Activity', 'cdcrm' ),
-// 			'search_items' => __( 'Search activities', 'cdcrm' ),
-// 			'not_found' => __( 'No activities found.', 'cdcrm' ),
-// 			'create' => __( 'Add Activity', 'cdcrm' ),
-// 			),
-//     ) );
-// }
-// add_action( 'p2p_init', 'cdcrm_people_and_activities' );
+function cdcrm_people_and_activities() {
+    // create the connection between people and activities
+    p2p_register_connection_type( array(
+        'name' => 'people_to_activities',
+        'from' => 'person',
+        'to' => 'activity',
+        'admin_box' => array(
+		    'context' => 'advanced'
+		  	),
+        'title' => array(
+		    'from' => __( 'This Person\'s Activities', 'cdcrm' ),
+		    'to' => __( 'Person', 'cdcrm' )
+		  	),
+        'to_labels' => array(
+			'singular_name' => __( 'Activity', 'cdcrm' ),
+			'search_items' => __( 'Search activities', 'cdcrm' ),
+			'not_found' => __( 'No activities found.', 'cdcrm' ),
+			'create' => __( 'Add Activity', 'cdcrm' ),
+			),
+/*        'fields' => array(
+	        'count' => array(
+	            'title' => 'Count',
+	            'type' => 'text',
+	        ),
+	        'role' => array( 
+	            'title' => 'Role',
+	            'type' => 'select',
+	            'values' => array( 'engineer', 'support', 'manager' )
+	        ),
+	        'special' => array(
+	            'title' => 'Special',
+	            'type' => 'checkbox'
+	        ),
+	        'colors' => array(
+	            'title' => 'Colors',
+	            'type' => 'checkbox',
+	            'values' => array( 
+	                                'green'=>__('Green','my-textdomain'), 
+	                                'yellow'=>__('Yellow','my-textdomain'), 
+	                                'blue'=>__('Blue','my-textdomain'), 
+	                                'white'=>__('White','my-textdomain') ),
+	            'default' => 'blue'
+	        ),
+	    )*/
+    ) );
+}
+add_action( 'p2p_init', 'cdcrm_people_and_activities' );
 
 // When you create an activity on the edit person screen, the activity should be published right away
 function cdcrm_published_by_default( $args, $ctype, $post_id ) {

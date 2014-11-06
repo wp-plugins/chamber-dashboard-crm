@@ -60,6 +60,9 @@ Don't hesitate to [contact me](http://chamberdashboard.com/contact) if you have 
 
 == Changelog ==
 
+= 1.1.1 =
+* Minor bug fixes
+
 = 1.1 =
 * Can now track people's activities
 

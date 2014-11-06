@@ -11,7 +11,7 @@
 		<?php $mb->the_field('prefix'); ?>
 		<label><?php _e('Prefix', 'cdcrm'); ?></label>
 		<p><input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/></p> 
-		<p><span><?php _e('Example: Jr., III, Esq., etc.', 'cdcrm'); ?></span></p>
+		<p><span><?php _e('Example: Dr., Mr., Ms., etc.', 'cdcrm'); ?></span></p>
 	</div>
 
 	<div class="third">

@@ -3,7 +3,7 @@
 Plugin Name: Chamber Dashboard CRM
 Plugin URI: http://chamberdashboard.com
 Description: Customer Relationship Management for your Chamber of Commerce
-Version: 1.1
+Version: 1.1.1
 Author: Morgan Kay
 Author URI: http://wpalchemists.com
 */
@@ -105,6 +105,9 @@ function cdcrm_register_taxonomy_people_category() {
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
+		'rewrite' => array (
+            'slug' => _x( 'people_category', 'people_category', 'cdcrm' )
+        )
 	);
 	register_taxonomy( 'people_category', array( 'person' ), $args );
 
@@ -140,6 +143,9 @@ function cdcrm_register_taxonomy_activity_category() {
 		'show_admin_column'          => false,
 		'show_in_nav_menus'          => false,
 		'show_tagcloud'              => false,
+		'rewrite' => array (
+            'slug' => _x( 'activity_category', 'activity_category', 'cdcrm' )
+        )
 	);
 	register_taxonomy( 'activity_category', array( 'activity' ), $args );
 
@@ -195,6 +201,9 @@ function cdcrm_register_cpt_person() {
 		'exclude_from_search' => true,
 		'publicly_queryable'  => false,
 		'capability_type'     => 'post',
+		'rewrite' => array (
+            'slug' => _x( 'person', 'person', 'cdcrm' )
+        )
 	);
 	register_post_type( 'person', $args );
 
@@ -239,6 +248,9 @@ function cdcrm_register_cpt_activity() {
 		'exclude_from_search' => true,
 		'publicly_queryable'  => false,
 		'capability_type'     => 'post',
+		'rewrite' => array (
+            'slug' => _x( 'activity', 'activity', 'cdcrm' )
+        )
 	);
 	register_post_type( 'activity', $args );
 
@@ -361,7 +373,7 @@ if ( cdcrm_business_directory_installed() ) {
 	        'fields' => array(
 		        'role' => array( 
 		            'title' => 'Role',
-		            'type' => 'select',
+		            'type' => 'checkbox',
 		            'values' => $rolesarray,
 		        ),
 	        )
@@ -376,6 +388,7 @@ function cdcrm_people_and_activities() {
         'name' => 'people_to_activities',
         'from' => 'person',
         'to' => 'activity',
+        'admin_column' => 'to',
         'admin_box' => array(
 		    'context' => 'advanced'
 		  	),
@@ -389,31 +402,6 @@ function cdcrm_people_and_activities() {
 			'not_found' => __( 'No activities found.', 'cdcrm' ),
 			'create' => __( 'Add Activity', 'cdcrm' ),
 			),
-/*        'fields' => array(
-	        'count' => array(
-	            'title' => 'Count',
-	            'type' => 'text',
-	        ),
-	        'role' => array( 
-	            'title' => 'Role',
-	            'type' => 'select',
-	            'values' => array( 'engineer', 'support', 'manager' )
-	        ),
-	        'special' => array(
-	            'title' => 'Special',
-	            'type' => 'checkbox'
-	        ),
-	        'colors' => array(
-	            'title' => 'Colors',
-	            'type' => 'checkbox',
-	            'values' => array( 
-	                                'green'=>__('Green','my-textdomain'), 
-	                                'yellow'=>__('Yellow','my-textdomain'), 
-	                                'blue'=>__('Blue','my-textdomain'), 
-	                                'white'=>__('White','my-textdomain') ),
-	            'default' => 'blue'
-	        ),
-	    )*/
     ) );
 }
 add_action( 'p2p_init', 'cdcrm_people_and_activities' );

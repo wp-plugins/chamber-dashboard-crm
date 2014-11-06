@@ -73,6 +73,10 @@ td.p2p-col-create {
 	padding: 0;
 }
 
+.p2p-col-meta-role label {
+	display: block;
+}
+
 .p2p-results tr:first-child td {
 	border-top: 0;
 }

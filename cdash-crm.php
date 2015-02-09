@@ -3,7 +3,7 @@
 Plugin Name: Chamber Dashboard CRM
 Plugin URI: http://chamberdashboard.com
 Description: Customer Relationship Management for your Chamber of Commerce
-Version: 1.1.1
+Version: 1.2
 Author: Morgan Kay
 Author URI: http://wpalchemists.com
 */
@@ -38,11 +38,33 @@ function cdcrm_requires_wordpress_version() {
 	if ( version_compare($wp_version, "3.8", "<" ) ) {
 		if( is_plugin_active($plugin) ) {
 			deactivate_plugins( $plugin );
-			wp_die( "'".$plugin_data['Name']."' requires WordPress 3.3 or higher, and has been deactivated! Please upgrade WordPress and try again.<br /><br />Back to <a href='".admin_url()."'>WordPress admin</a>." );
+			wp_die( "'".$plugin_data['Name']."' requires WordPress 3.8 or higher, and has been deactivated! Please upgrade WordPress and try again.<br /><br />Back to <a href='".admin_url()."'>WordPress admin</a>." );
 		}
 	}
 }
 add_action( 'admin_init', 'cdcrm_requires_wordpress_version' );
+
+// ------------------------------------------------------------------------
+// REQUIRE CHAMBER DASHBOARD BUSINESS DIRECTORY   
+// thanks to http://wordpress.stackexchange.com/questions/127818/how-to-make-a-plugin-require-another-plugin                                           
+// ------------------------------------------------------------------------
+
+add_action( 'admin_init', 'cdcrm_require_business_directory' );
+function cdcrm_require_business_directory() {
+    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'chamber-dashboard-business-directory/cdash-business-directory.php' ) ) {
+        add_action( 'admin_notices', 'cdcrm_business_directory_notice' );
+
+        deactivate_plugins( plugin_basename( __FILE__ ) ); 
+
+        if ( isset( $_GET['activate'] ) ) {
+            unset( $_GET['activate'] );
+        }
+    }
+}
+
+function cdcrm_business_directory_notice(){
+    ?><div class="error"><p><?php _e('Sorry, but the Chamber Dashboard CRM requires the <a href="https://wordpress.org/plugins/chamber-dashboard-business-directory/" target="_blank">Chamber Dashboard Business Directory</a> to be installed and active.', 'cdcrm' ); ?></p></div><?php
+}
 
 // ------------------------------------------------------------------------
 // REGISTER HOOKS & CALLBACK FUNCTIONS:
@@ -65,13 +87,6 @@ function cdcrm_language_init() {
 }
 add_action('init', 'cdcrm_language_init');
 
-// Set up a function to tell us if the Chamber Dashboard Business Directory plugin is active
-function cdcrm_business_directory_installed() {
-	if( function_exists( 'cdash_register_cpt_business' ) ) {
-		return true;
-	} 
-}
-add_action( 'plugins_loaded', 'cdcrm_business_directory_installed' );
 
 // ------------------------------------------------------------------------
 // SET UP CUSTOM POST TYPES AND TAXONOMIES
@@ -263,16 +278,12 @@ add_action( 'init', 'cdcrm_register_cpt_activity', 0 );
 // SET UP METABOXES
 // ------------------------------------------------------------------------
 
-if ( !cdcrm_business_directory_installed() ) {
-	// we only need to require wpalchemy files if Chamber Dashboard Business Directory is not active
-	include_once 'wpalchemy/MetaBox.php';
-}
 define( 'CDCRM_PATH', plugin_dir_path(__FILE__) );
 
 // Add a stylesheet to the admin area to make meta boxes look nice
 function cdcrm_metabox_stylesheet()
 {
-    if ( is_admin() && !cdcrm_business_directory_installed() )
+    if ( is_admin() )
     {
         wp_enqueue_style( 'wpalchemy-metabox', plugins_url() . '/chamber-dashboard-crm/wpalchemy/meta.css' );
     }
@@ -309,78 +320,30 @@ if(!empty($options['person_custom'])) {
 // https://github.com/scribu/wp-posts-to-posts/blob/master/posts-to-posts.php
 // ------------------------------------------------------------------------
 
+// Create the connection between businesses and people 
+function cdcrm_people_and_businesses() {
+	// Get the list of roles from the options page
+	$options = get_option('cdcrm_options');
+	$roleslist = $options['person_business_roles'];
+	$rolesarray = explode( ",", $roleslist);
 
-function cdcrm_p2p_check() {
-	if ( !is_plugin_active( 'posts-to-posts/posts-to-posts.php' ) ) {
-		require_once dirname( __FILE__ ) . '/wpp2p/autoload.php';
-		define( 'P2P_PLUGIN_VERSION', '1.6.3' );
-		define( 'P2P_TEXTDOMAIN', 'cdcrm' );
-	}
+	// create the connection between people and businesses
+    p2p_register_connection_type( array(
+        'name' => 'businesses_to_people',
+        'from' => 'business',
+        'to' => 'person',
+        'reciprocal' => true,
+        'admin_column' => 'any',
+        'fields' => array(
+	        'role' => array( 
+	            'title' => 'Role',
+	            'type' => 'checkbox',
+	            'values' => $rolesarray,
+	        ),
+        )
+    ) );
 }
-add_action( 'admin_init', 'cdcrm_p2p_check' );
-
-function cdcrm_p2p_load() {
-	//load_plugin_textdomain( P2P_TEXTDOMAIN, '', basename( dirname( __FILE__ ) ) . '/languages' );
-	if ( !function_exists( 'p2p_register_connection_type' ) ) {
-		require_once dirname( __FILE__ ) . '/wpp2p/autoload.php';
-	}
-	P2P_Storage::init();
-	P2P_Query_Post::init();
-	P2P_Query_User::init();
-	P2P_URL_Query::init();
-	P2P_Widget::init();
-	P2P_Shortcodes::init();
-	register_uninstall_hook( __FILE__, array( 'P2P_Storage', 'uninstall' ) );
-	if ( is_admin() )
-		cdcrm_load_admin();
-}
-
-function cdcrm_load_admin() {
-	P2P_Autoload::register( 'P2P_', dirname( __FILE__ ) . '/wpp2p/admin' );
-
-	new P2P_Box_Factory;
-	new P2P_Column_Factory;
-	new P2P_Dropdown_Factory;
-
-	new P2P_Tools_Page;
-}
-
-function cdcrm_p2p_init() {
-	// Safe hook for calling p2p_register_connection_type()
-	do_action( 'p2p_init' );
-}
-
-require dirname( __FILE__ ) . '/wpp2p/scb/load.php';
-scb_init( 'cdcrm_p2p_load' );
-add_action( 'wp_loaded', 'cdcrm_p2p_init' );
-
-
-// Create the connection between businesses and people if business directory is installed
-if ( cdcrm_business_directory_installed() ) {
-	function cdcrm_people_and_businesses() {
-		// Get the list of roles from the options page
-		$options = get_option('cdcrm_options');
-		$roleslist = $options['person_business_roles'];
-		$rolesarray = explode( ",", $roleslist);
-
-		// create the connection between people and businesses
-	    p2p_register_connection_type( array(
-	        'name' => 'businesses_to_people',
-	        'from' => 'business',
-	        'to' => 'person',
-	        'reciprocal' => true,
-	        'admin_column' => 'any',
-	        'fields' => array(
-		        'role' => array( 
-		            'title' => 'Role',
-		            'type' => 'checkbox',
-		            'values' => $rolesarray,
-		        ),
-	        )
-	    ) );
-	}
-	add_action( 'p2p_init', 'cdcrm_people_and_businesses' );
-}
+add_action( 'p2p_init', 'cdcrm_people_and_businesses' );
 
 function cdcrm_people_and_activities() {
     // create the connection between people and activities

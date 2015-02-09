@@ -197,29 +197,7 @@ function cdcrm_render_form() {
 
 			</script>
 		</div><!-- #main -->
-		<div id="sidebar" style="width: 28%; float: right; min-width: 150px;">
-			<h3><?php _e('Documentation', 'cdash'); ?></h3>
-			<p><?php _e('If you\'re looking for more information about how to use this plugin, visit the <a href="http://chamberdashboard.com/support/documentation/" target="_blank">Documentation page at ChamberDashboard.com', 'cdash'); ?></a></p>
-			<h3><?php _e('Contact', 'cdash'); ?></h3>
-			<p><?php _e('Don\'t hesitate to <a href="http://chamberdashboard.com/contact/" target="_blank">contact us</a> to request new features, ask questions, or just say hi.', 'cdash'); ?></p>
-			<h3><?php _e('Other Chamber Dashboard Plugins', 'cdash'); ?></h3>
-			<p><?php _e('This plugin is designed to work with the <a href="http://wordpress.org/plugins/chamber-dashboard-business-directory/" target="_blank">Chamber Dashboard Business Directory</a> plugin - create a directory of the businesses in your organization and display it on your website, and keep track of how people are associated with businesses!', 'cdash'); ?></p> 
-			<h3><?php _e('Donate', 'cdash'); ?></h3>
-			<p><?php _e('All donations are tax-deductible and go to the <a href="http://fremont.com" target="_blank">Fremont Chamber of Commerce</a> to support further development of Chamber Dashboard.', 'cdash'); ?></p>
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-			<input type="hidden" name="cmd" value="_donations">
-			<input type="hidden" name="business" value="director@fremont.com">
-			<input type="hidden" name="lc" value="US">
-			<input type="hidden" name="item_name" value="Fremont Chamber of Commerce">
-			<input type="hidden" name="item_number" value="Chamber Dashboard">
-			<input type="hidden" name="no_note" value="0">
-			<input type="hidden" name="currency_code" value="USD">
-			<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">
-			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-			</form>
-
-		</div>
+		<?php include( plugin_dir_path( __FILE__ ) . '/includes/aside.php' ); ?>
 	</div>
 
 	<?php	

@@ -59,6 +59,8 @@ Don't hesitate to [contact me](http://chamberdashboard.com/contact) if you have 
 1. Entering business information
 
 == Changelog ==
+= 1.2.1 =
+* fixed compatibility error
 
 = 1.2 =
 * Increased compatibility with other Chamber Dashboard plugins

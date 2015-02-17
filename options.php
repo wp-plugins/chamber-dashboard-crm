@@ -47,21 +47,7 @@ function cdcrm_init(){
 
 // Add menu page
 function cdcrm_add_options_page() {
-	if ( is_plugin_active( 'chamber-dashboard-business-directory/cdash-business-directory.php' ) ) {
-		// Chamber Dashboard Business Directory plugin is active, so we just need to add a submenu page
-		add_submenu_page( '/chamber-dashboard-business-directory/options.php', __('CRM Options', 'cdcrm'), __('CRM Options', 'cdcrm'), 'manage_options', 'cdash-crm', 'cdcrm_render_form' );
-	} else {
-		// Chamber Dashboard Business Directory plugin is not active, so we need to add the whole menu
-		add_menu_page( 
-			__('Chamber Dashboard', 'cdcrm'), 
-			__('Chamber Dashboard', 'cdcrm'),  
-			'manage_options', 
-			'/cdash-crm/options.php', 
-			'cdcrm_render_form', 
-			'dashicons-admin-generic', 
-			85 
-		);
-	}
+	add_submenu_page( '/chamber-dashboard-business-directory/options.php', __('CRM Options', 'cdcrm'), __('CRM Options', 'cdcrm'), 'manage_options', 'cdash-crm', 'cdcrm_render_form' );
 }
 
 
@@ -112,15 +98,13 @@ function cdcrm_render_form() {
 					</tr>	
 
 					<!-- Business Roles -->
-					<?php if ( cdcrm_business_directory_installed() ) { // show this only if business directory is also installed ?>
-						<tr>
-							<th scope="row"><?php _e('Business Roles', 'cdcrm'); ?></th>
-							<td>
-								<input type="text" size="57" name="cdcrm_options[person_business_roles]" value="<?php if (isset($options['person_business_roles'])) { echo $options['person_business_roles']; } ?>" />
-								<br /><span style="color:#666666;margin-left:2px;"><?php _e('You can connect people to businesses, and describe the person\'s role in that business.  The default options are "Owner, Manager, Employee, Accounting".  To change these options, enter a comma-separated list here.  (Note: your entry will over-ride the default, so if you still want owner and/or manager and/or employee, you will need to enter them.', 'cdcrm'); ?></span>
-							</td>
-						</tr>	
-					<?php } ?>
+					<tr>
+						<th scope="row"><?php _e('Business Roles', 'cdcrm'); ?></th>
+						<td>
+							<input type="text" size="57" name="cdcrm_options[person_business_roles]" value="<?php if (isset($options['person_business_roles'])) { echo $options['person_business_roles']; } ?>" />
+							<br /><span style="color:#666666;margin-left:2px;"><?php _e('You can connect people to businesses, and describe the person\'s role in that business.  The default options are "Owner, Manager, Employee, Accounting".  To change these options, enter a comma-separated list here.  (Note: your entry will over-ride the default, so if you still want owner and/or manager and/or employee, you will need to enter them.', 'cdcrm'); ?></span>
+						</td>
+					</tr>	
 			
 
 					<!-- Custom Fields -->

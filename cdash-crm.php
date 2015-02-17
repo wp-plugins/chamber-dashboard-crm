@@ -290,29 +290,32 @@ function cdcrm_metabox_stylesheet()
 }
 add_action( 'init', 'cdcrm_metabox_stylesheet' );
 
-// Create metabox for people
-$person_metabox = new WPAlchemy_MetaBox(array
-(
-    'id' => 'person_meta',
-    'title' => 'Contact Information ',
-    'types' => array('person'),
-    'template' => CDCRM_PATH . '/wpalchemy/person.php',
-    'mode' => WPALCHEMY_MODE_EXTRACT,
-    'prefix' => '_cdcrm_'
-));
+if( is_plugin_active( 'chamber-dashboard-business-directory/cdash-business-directory.php' ) ) {
 
-$options = get_option('cdcrm_options');
-if(!empty($options['person_custom'])) {
-	// Create metabox for custom fields
-	$custom_metabox = new WPAlchemy_MetaBox(array
+	// Create metabox for people
+	$person_metabox = new WPAlchemy_MetaBox(array
 	(
-	    'id' => 'custom_meta',
-	    'title' => 'Custom Fields',
+	    'id' => 'person_meta',
+	    'title' => 'Contact Information ',
 	    'types' => array('person'),
-	    'template' => CDCRM_PATH . '/wpalchemy/personcustom.php',
+	    'template' => CDCRM_PATH . '/wpalchemy/person.php',
 	    'mode' => WPALCHEMY_MODE_EXTRACT,
 	    'prefix' => '_cdcrm_'
 	));
+
+	$options = get_option('cdcrm_options');
+	if(!empty($options['person_custom'])) {
+		// Create metabox for custom fields
+		$custom_metabox = new WPAlchemy_MetaBox(array
+		(
+		    'id' => 'custom_meta',
+		    'title' => 'Custom Fields',
+		    'types' => array('person'),
+		    'template' => CDCRM_PATH . '/wpalchemy/personcustom.php',
+		    'mode' => WPALCHEMY_MODE_EXTRACT,
+		    'prefix' => '_cdcrm_'
+		));
+	}
 }
 
 // ------------------------------------------------------------------------
@@ -320,60 +323,62 @@ if(!empty($options['person_custom'])) {
 // https://github.com/scribu/wp-posts-to-posts/blob/master/posts-to-posts.php
 // ------------------------------------------------------------------------
 
-// Create the connection between businesses and people 
-function cdcrm_people_and_businesses() {
-	// Get the list of roles from the options page
-	$options = get_option('cdcrm_options');
-	$roleslist = $options['person_business_roles'];
-	$rolesarray = explode( ",", $roleslist);
+if( is_plugin_active( 'chamber-dashboard-business-directory/cdash-business-directory.php' ) ) {
+	// Create the connection between businesses and people 
+	function cdcrm_people_and_businesses() {
+		// Get the list of roles from the options page
+		$options = get_option('cdcrm_options');
+		$roleslist = $options['person_business_roles'];
+		$rolesarray = explode( ",", $roleslist);
 
-	// create the connection between people and businesses
-    p2p_register_connection_type( array(
-        'name' => 'businesses_to_people',
-        'from' => 'business',
-        'to' => 'person',
-        'reciprocal' => true,
-        'admin_column' => 'any',
-        'fields' => array(
-	        'role' => array( 
-	            'title' => 'Role',
-	            'type' => 'checkbox',
-	            'values' => $rolesarray,
-	        ),
-        )
-    ) );
-}
-add_action( 'p2p_init', 'cdcrm_people_and_businesses' );
+		// create the connection between people and businesses
+	    p2p_register_connection_type( array(
+	        'name' => 'businesses_to_people',
+	        'from' => 'business',
+	        'to' => 'person',
+	        'reciprocal' => true,
+	        'admin_column' => 'any',
+	        'fields' => array(
+		        'role' => array( 
+		            'title' => 'Role',
+		            'type' => 'checkbox',
+		            'values' => $rolesarray,
+		        ),
+	        )
+	    ) );
+	}
+	add_action( 'p2p_init', 'cdcrm_people_and_businesses' );
 
-function cdcrm_people_and_activities() {
-    // create the connection between people and activities
-    p2p_register_connection_type( array(
-        'name' => 'people_to_activities',
-        'from' => 'person',
-        'to' => 'activity',
-        'admin_column' => 'to',
-        'admin_box' => array(
-		    'context' => 'advanced'
-		  	),
-        'title' => array(
-		    'from' => __( 'This Person\'s Activities', 'cdcrm' ),
-		    'to' => __( 'Person', 'cdcrm' )
-		  	),
-        'to_labels' => array(
-			'singular_name' => __( 'Activity', 'cdcrm' ),
-			'search_items' => __( 'Search activities', 'cdcrm' ),
-			'not_found' => __( 'No activities found.', 'cdcrm' ),
-			'create' => __( 'Add Activity', 'cdcrm' ),
-			),
-    ) );
-}
-add_action( 'p2p_init', 'cdcrm_people_and_activities' );
+	function cdcrm_people_and_activities() {
+	    // create the connection between people and activities
+	    p2p_register_connection_type( array(
+	        'name' => 'people_to_activities',
+	        'from' => 'person',
+	        'to' => 'activity',
+	        'admin_column' => 'to',
+	        'admin_box' => array(
+			    'context' => 'advanced'
+			  	),
+	        'title' => array(
+			    'from' => __( 'This Person\'s Activities', 'cdcrm' ),
+			    'to' => __( 'Person', 'cdcrm' )
+			  	),
+	        'to_labels' => array(
+				'singular_name' => __( 'Activity', 'cdcrm' ),
+				'search_items' => __( 'Search activities', 'cdcrm' ),
+				'not_found' => __( 'No activities found.', 'cdcrm' ),
+				'create' => __( 'Add Activity', 'cdcrm' ),
+				),
+	    ) );
+	}
+	add_action( 'p2p_init', 'cdcrm_people_and_activities' );
 
-// When you create an activity on the edit person screen, the activity should be published right away
-function cdcrm_published_by_default( $args, $ctype, $post_id ) {
-    $args['post_status'] = 'publish';
-    return $args;
+	// When you create an activity on the edit person screen, the activity should be published right away
+	function cdcrm_published_by_default( $args, $ctype, $post_id ) {
+	    $args['post_status'] = 'publish';
+	    return $args;
+	}
+	add_filter( 'p2p_new_post_args', 'cdcrm_published_by_default', 10, 3 );
 }
-add_filter( 'p2p_new_post_args', 'cdcrm_published_by_default', 10, 3 );
 
 ?>

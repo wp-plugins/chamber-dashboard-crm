@@ -290,7 +290,7 @@ function cdcrm_metabox_stylesheet()
 }
 add_action( 'init', 'cdcrm_metabox_stylesheet' );
 
-if( is_plugin_active( 'chamber-dashboard-business-directory/cdash-business-directory.php' ) ) {
+if( class_exists( 'WPAlchemy_MetaBox' ) ) {
 
 	// Create metabox for people
 	$person_metabox = new WPAlchemy_MetaBox(array
@@ -323,7 +323,7 @@ if( is_plugin_active( 'chamber-dashboard-business-directory/cdash-business-direc
 // https://github.com/scribu/wp-posts-to-posts/blob/master/posts-to-posts.php
 // ------------------------------------------------------------------------
 
-if( is_plugin_active( 'chamber-dashboard-business-directory/cdash-business-directory.php' ) ) {
+if( class_exists( 'P2P_Autoload' ) ) {
 	// Create the connection between businesses and people 
 	function cdcrm_people_and_businesses() {
 		// Get the list of roles from the options page

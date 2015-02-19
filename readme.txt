@@ -59,6 +59,9 @@ Don't hesitate to [contact me](http://chamberdashboard.com/contact) if you have 
 1. Entering business information
 
 == Changelog ==
+= 1.2.2 =
+* fixed bug that hid connected businesses
+
 = 1.2.1 =
 * fixed compatibility error
 

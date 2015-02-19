@@ -3,7 +3,7 @@
 Plugin Name: Chamber Dashboard CRM
 Plugin URI: http://chamberdashboard.com
 Description: Customer Relationship Management for your Chamber of Commerce
-Version: 1.2.1
+Version: 1.2.2
 Author: Morgan Kay
 Author URI: http://wpalchemists.com
 */
@@ -323,7 +323,7 @@ if( class_exists( 'WPAlchemy_MetaBox' ) ) {
 // https://github.com/scribu/wp-posts-to-posts/blob/master/posts-to-posts.php
 // ------------------------------------------------------------------------
 
-if( class_exists( 'P2P_Autoload' ) ) {
+if( defined( 'CDASH_PATH' ) ) {
 	// Create the connection between businesses and people 
 	function cdcrm_people_and_businesses() {
 		// Get the list of roles from the options page

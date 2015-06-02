@@ -3,7 +3,7 @@ Contributors: gwendydd
 Tags: Chamber of Commerce, CRM, customer relationship management, contacts, contacts directory
 Donate link: http://chamberdashboard.com/donate
 Requires at least: 3.7
-Tested up to: 4.0
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -59,6 +59,9 @@ Don't hesitate to [contact me](http://chamberdashboard.com/contact) if you have 
 1. Entering business information
 
 == Changelog ==
+= 1.2.3 =
+* changes to language files to facilitate translations
+
 = 1.2.2 =
 * fixed bug that hid connected businesses
 

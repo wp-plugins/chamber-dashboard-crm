@@ -1,0 +1,480 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cdash-crm\n"
+"POT-Creation-Date: 2014-09-09 17:21-0800\n"
+"PO-Revision-Date: 2014-09-09 17:21-0800\n"
+"Last-Translator: Morgan <morgan@wpalchemists.com>\n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../cdash-crm.php:86
+msgid "People Category"
+msgstr ""
+
+#: ../cdash-crm.php:87
+msgid "All People Categories"
+msgstr ""
+
+#: ../cdash-crm.php:88
+msgid "Parent People Category"
+msgstr ""
+
+#: ../cdash-crm.php:89
+msgid "Parent People Category:"
+msgstr ""
+
+#: ../cdash-crm.php:90
+msgid "New People Category Name"
+msgstr ""
+
+#: ../cdash-crm.php:91
+msgid "Add New People Category"
+msgstr ""
+
+#: ../cdash-crm.php:92
+msgid "Edit People Category"
+msgstr ""
+
+#: ../cdash-crm.php:93
+msgid "Update People Category"
+msgstr ""
+
+#: ../cdash-crm.php:94
+msgid "Separate People Categories with commas"
+msgstr ""
+
+#: ../cdash-crm.php:95
+msgid "Search People Categories"
+msgstr ""
+
+#: ../cdash-crm.php:96
+msgid "Add or remove People Category"
+msgstr ""
+
+#: ../cdash-crm.php:97
+msgid "Choose from the most used People Categories"
+msgstr ""
+
+#: ../cdash-crm.php:98
+msgid "Not Found"
+msgstr ""
+
+#: ../cdash-crm.php:167 ../cdash-crm.php:181
+msgid "People"
+msgstr ""
+
+#: ../cdash-crm.php:168
+msgid "Parent Person:"
+msgstr ""
+
+#: ../cdash-crm.php:169
+msgid "All People"
+msgstr ""
+
+#: ../cdash-crm.php:170
+msgid "View Person"
+msgstr ""
+
+#: ../cdash-crm.php:171
+msgid "Add New Person"
+msgstr ""
+
+#: ../cdash-crm.php:172
+msgid "Add New"
+msgstr ""
+
+#: ../cdash-crm.php:173
+msgid "Edit Person"
+msgstr ""
+
+#: ../cdash-crm.php:174
+msgid "Update Person"
+msgstr ""
+
+#: ../cdash-crm.php:175
+msgid "Search People"
+msgstr ""
+
+#: ../cdash-crm.php:176
+msgid "Not found"
+msgstr ""
+
+#: ../cdash-crm.php:177
+msgid "Not found in Trash"
+msgstr ""
+
+#: ../cdash-crm.php:180
+msgid "Person"
+msgstr ""
+
+#: ../options.php:83
+msgid "Chamber Dashboard Settings"
+msgstr ""
+
+#: ../options.php:98
+msgid "Phone Number Types"
+msgstr ""
+
+#: ../options.php:101
+msgid ""
+"When you enter a phone number for a person, you can choose what type of "
+"phone number it is.  The default options are \"Work, Home, Cell\".  To "
+"change these options, enter a comma-separated list here.  (Note: your entry "
+"will over-ride the default, so if you still want main and/or office and/or "
+"cell, you will need to enter them.)"
+msgstr ""
+
+#: ../options.php:107
+msgid "Email Types"
+msgstr ""
+
+#: ../options.php:110
+msgid ""
+"When you enter an email address for a business, you can choose what type of "
+"email address it is.  The default options are \"Work, Personal\".  To change "
+"these options, enter a comma-separated list here.  (Note: your entry will "
+"over-ride the default, so if you still want main and/or sales and/or "
+"accounting and/or HR, you will need to enter them.)"
+msgstr ""
+
+#: ../options.php:117
+msgid "Business Roles"
+msgstr ""
+
+#: ../options.php:120
+msgid ""
+"You can connect people to businesses, and describe the person's role in that "
+"business.  The default options are \"Owner, Manager, Employee\".  To change "
+"these options, enter a comma-separated list here.  (Note: your entry will "
+"over-ride the default, so if you still want owner and/or manager and/or "
+"employee, you will need to enter them."
+msgstr ""
+
+#: ../options.php:128
+msgid "Custom Fields"
+msgstr ""
+
+#: ../options.php:130
+msgid ""
+"If you need to store additional information about people, you can create "
+"custom fields here."
+msgstr ""
+
+#: ../options.php:136 ../options.php:150
+msgid "Custom Field Name"
+msgstr ""
+
+#: ../options.php:138 ../options.php:152
+msgid "Custom Field Type"
+msgstr ""
+
+#: ../options.php:141 ../options.php:155
+msgid "Short Text Field"
+msgstr ""
+
+#: ../options.php:142 ../options.php:156
+msgid "Multi-line Text Area"
+msgstr ""
+
+#: ../options.php:144 ../options.php:158
+msgid "Add Another"
+msgstr ""
+
+#: ../options.php:167
+msgid "Save Changes"
+msgstr ""
+
+#: ../options.php:201
+msgid "Documentation"
+msgstr ""
+
+#: ../options.php:202
+msgid ""
+"If you're looking for more information about how to use this plugin, visit "
+"the <a href=\"http://chamberdashboard.com/support/documentation/\" target="
+"\"_blank\">Documentation page at ChamberDashboard.com"
+msgstr ""
+
+#: ../options.php:203
+msgid "Contact"
+msgstr ""
+
+#: ../options.php:204
+msgid ""
+"Don't hesitate to <a href=\"http://chamberdashboard.com/contact/\" target="
+"\"_blank\">contact us</a> to request new features, ask questions, or just "
+"say hi."
+msgstr ""
+
+#: ../options.php:205
+msgid "Other Chamber Dashboard Plugins"
+msgstr ""
+
+#: ../options.php:206
+msgid ""
+"This plugin is designed to work with the <a href=\"http://wordpress.org/"
+"plugins/chamber-dashboard-business-directory/\" target=\"_blank\">Chamber "
+"Dashboard Business Directory</a> plugin - create a directory of the "
+"businesses in your organization and display it on your website, and keep "
+"track of how people are associated with businesses!"
+msgstr ""
+
+#: ../options.php:207
+msgid "Donate"
+msgstr ""
+
+#: ../options.php:208
+msgid ""
+"All donations are tax-deductible and go to the <a href=\"http://fremont.com"
+"\" target=\"_blank\">Fremont Chamber of Commerce</a> to support further "
+"development of Chamber Dashboard."
+msgstr ""
+
+#: ../options.php:244 ../wpp2p/scb/AdminPage.php:467
+msgid "Settings"
+msgstr ""
+
+#: ../wpalchemy/activity.php:3
+msgid ""
+"You can enter information about this person's activity here.  In later "
+"versions of the plugin, some activity will be automatically recorded, such "
+"as event attendance and donations, and you will be able to generate reports "
+"about people's activities."
+msgstr ""
+
+#: ../wpalchemy/activity.php:5
+msgid "Remove All Activities"
+msgstr ""
+
+#: ../wpalchemy/activity.php:12
+msgid "Date"
+msgstr ""
+
+#: ../wpalchemy/activity.php:15
+msgid "Activity Description"
+msgstr ""
+
+#: ../wpalchemy/activity.php:24
+msgid "Add Another Activity"
+msgstr ""
+
+#: ../wpalchemy/association.php:2
+msgid "Business"
+msgstr ""
+
+#: ../wpalchemy/person.php:2
+msgid "Address"
+msgstr ""
+
+#: ../wpalchemy/person.php:12
+msgid "City"
+msgstr ""
+
+#: ../wpalchemy/person.php:18
+msgid "State"
+msgstr ""
+
+#: ../wpalchemy/person.php:24
+msgid "Zip"
+msgstr ""
+
+#: ../wpalchemy/person.php:29
+msgid "Phone Number(s)"
+msgstr ""
+
+#: ../wpalchemy/person.php:31
+msgid "Remove All Phone Numbers"
+msgstr ""
+
+#: ../wpalchemy/person.php:36
+msgid "Phone Number"
+msgstr ""
+
+#: ../wpalchemy/person.php:40
+msgid "Phone Number Type"
+msgstr ""
+
+#: ../wpalchemy/person.php:52
+msgid "Remove This Phone Number"
+msgstr ""
+
+#: ../wpalchemy/person.php:57
+msgid "Add Another Phone Number"
+msgstr ""
+
+#: ../wpalchemy/person.php:61
+msgid "Email Address(es)"
+msgstr ""
+
+#: ../wpalchemy/person.php:62
+msgid "Remove All Email Addresses"
+msgstr ""
+
+#: ../wpalchemy/person.php:67
+msgid "Email Address"
+msgstr ""
+
+#: ../wpalchemy/person.php:71
+msgid "Email Address Type"
+msgstr ""
+
+#: ../wpalchemy/person.php:83
+msgid "Remove This Email Address"
+msgstr ""
+
+#: ../wpalchemy/person.php:88
+msgid "Add Another Email Address"
+msgstr ""
+
+#: ../wpalchemy/personcustom.php:20
+msgid "<p>The field "
+msgstr ""
+
+#: ../wpp2p/admin/box.php:48
+msgid "Are you sure you want to delete all connections?"
+msgstr ""
+
+#: ../wpp2p/admin/box.php:140
+msgid "Search"
+msgstr ""
+
+#: ../wpp2p/admin/box.php:230
+msgid "previous"
+msgstr ""
+
+#: ../wpp2p/admin/box.php:231
+msgid "next"
+msgstr ""
+
+#: ../wpp2p/admin/box.php:232
+msgid "of"
+msgstr ""
+
+#: ../wpp2p/admin/dropdown-user.php:32
+msgid "Filter"
+msgstr ""
+
+#: ../wpp2p/admin/factory.php:88
+msgid " (from)"
+msgstr ""
+
+#: ../wpp2p/admin/factory.php:89
+msgid " (to)"
+msgstr ""
+
+#: ../wpp2p/admin/field-delete.php:7
+msgid "Delete all connections"
+msgstr ""
+
+#: ../wpp2p/admin/field-delete.php:16
+msgid "Delete connection"
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:7
+msgid "Connection Types"
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:41
+#, php-format
+msgid "<em>%s</em> is not a registered connection type."
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:50
+#, php-format
+msgid "Converted %1$s connections from <em>%2$s</em> to <em>%3$s</em>."
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:64
+msgid "Name"
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:65
+msgid "Information"
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:66
+msgid "Connections"
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:74
+msgid "No connection types registered."
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:76
+#, php-format
+msgid "To register a connection type, see <a href=\"%s\">the wiki</a>."
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:93
+msgid "Convert to registered connection type:"
+msgstr ""
+
+#: ../wpp2p/admin/tools-page.php:129
+msgid "Go"
+msgstr ""
+
+#: ../wpp2p/connection-type.php:91
+msgid "Create connections"
+msgstr ""
+
+#: ../wpp2p/connection-type.php:109
+#, php-format
+msgid "Connected %s"
+msgstr ""
+
+#: ../wpp2p/scb/AdminPage.php:228
+msgid "Settings <strong>saved</strong>."
+msgstr ""
+
+#: ../wpp2p/side-user.php:16
+msgid "Users"
+msgstr ""
+
+#: ../wpp2p/side-user.php:25
+msgid "User"
+msgstr ""
+
+#: ../wpp2p/side-user.php:26
+msgid "Search Users"
+msgstr ""
+
+#: ../wpp2p/side-user.php:27
+msgid "No users found."
+msgstr ""
+
+#: ../wpp2p/widget.php:19
+msgid "Posts 2 Posts"
+msgstr ""
+
+#: ../wpp2p/widget.php:20
+msgid "A list of posts connected to the current post"
+msgstr ""
+
+#: ../wpp2p/widget.php:37
+msgid "Title:"
+msgstr ""
+
+#: ../wpp2p/widget.php:44
+msgid "Connection type:"
+msgstr ""
+
+#: ../wpp2p/widget.php:49
+msgid "Connection listing:"
+msgstr ""
+
+#: ../wpp2p/widget.php:55
+msgid "connected"
+msgstr ""
+
+#: ../wpp2p/widget.php:56
+msgid "related"
+msgstr ""

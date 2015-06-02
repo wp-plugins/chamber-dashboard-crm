@@ -3,9 +3,10 @@
 Plugin Name: Chamber Dashboard CRM
 Plugin URI: http://chamberdashboard.com
 Description: Customer Relationship Management for your Chamber of Commerce
-Version: 1.2.2
+Version: 1.2.3
 Author: Morgan Kay
 Author URI: http://wpalchemists.com
+Text Domain: cdcrm
 */
 
 /*  Copyright 2014 Morgan Kay and the Fremont Chamber of Commerce (email : info@chamberdashboard.com)
@@ -279,16 +280,6 @@ add_action( 'init', 'cdcrm_register_cpt_activity', 0 );
 // ------------------------------------------------------------------------
 
 define( 'CDCRM_PATH', plugin_dir_path(__FILE__) );
-
-// Add a stylesheet to the admin area to make meta boxes look nice
-function cdcrm_metabox_stylesheet()
-{
-    if ( is_admin() )
-    {
-        wp_enqueue_style( 'wpalchemy-metabox', plugins_url() . '/chamber-dashboard-crm/wpalchemy/meta.css' );
-    }
-}
-add_action( 'init', 'cdcrm_metabox_stylesheet' );
 
 if( class_exists( 'WPAlchemy_MetaBox' ) ) {
 

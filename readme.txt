@@ -59,6 +59,13 @@ Don't hesitate to [contact me](http://chamberdashboard.com/contact) if you have 
 1. Entering business information
 
 == Changelog ==
+= 1.3 =
+* updated settings page to use settings API better
+* fixed bug on repeating fields on settings page
+* added actions to work with advanced importer
+* added shortcode to display people in a given category
+* added option to display person in business listing
+
 = 1.2.3 =
 * changes to language files to facilitate translations
 

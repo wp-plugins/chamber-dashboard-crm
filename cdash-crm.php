@@ -3,13 +3,13 @@
 Plugin Name: Chamber Dashboard CRM
 Plugin URI: http://chamberdashboard.com
 Description: Customer Relationship Management for your Chamber of Commerce
-Version: 1.2.3
+Version: 1.3
 Author: Morgan Kay
 Author URI: http://wpalchemists.com
 Text Domain: cdcrm
 */
 
-/*  Copyright 2014 Morgan Kay and the Fremont Chamber of Commerce (email : info@chamberdashboard.com)
+/*  Copyright 2015 Morgan Kay (email : hello@chamberdashboard.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -81,6 +81,8 @@ add_filter( 'plugin_action_links', 'cdcrm_plugin_action_links', 10, 2 );
 // Require options stuff
 require_once( plugin_dir_path( __FILE__ ) . 'options.php' );
 
+// Require views
+require_once( plugin_dir_path( __FILE__ ) . 'views.php' );
 
 // Initialize language so it can be translated
 function cdcrm_language_init() {
@@ -202,7 +204,7 @@ function cdcrm_register_cpt_person() {
 		'label'               => __( 'Person', 'cdcrm' ),
 		'description'         => __( 'People', 'cdcrm' ),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor', 'thumbnail', 'revisions', ),
+		'supports'            => array( 'title', 'editor', 'thumbnail', 'revisions', 'page-attributes' ),
 		'taxonomies'          => array( 'people_category' ),
 		'hierarchical'        => false,
 		'public'              => false,
@@ -334,6 +336,11 @@ if( defined( 'CDASH_PATH' ) ) {
 		            'title' => 'Role',
 		            'type' => 'checkbox',
 		            'values' => $rolesarray,
+		        ),
+		        'display' => array(
+		        	'title' => 'Display',
+		            'type' => 'checkbox',
+		            'values' => array( 'Yes' ),
 		        ),
 	        )
 	    ) );

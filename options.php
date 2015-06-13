@@ -102,6 +102,28 @@ function cdcrm_settings_init() {
 	);
 
 	add_settings_field( 
+		'person_display', 
+		__( 'Display Contacts', 'cdcrm' ), 
+		'cdcrm_person_display_render', 
+		'cdcrm_settings_page', 
+		'cdcrm_settings_page_section',
+		array( 
+			__( 'When you connect a person to a business, you can choose to display that person\'s contact information in the business directory by checking the box next to "Display."  Select where you want that person\'s information to display.', 'cdcrm')  
+		) 
+	);
+
+	add_settings_field( 
+		'person_display_fields', 
+		__( 'Fields to Display', 'cdcrm' ), 
+		'cdcrm_person_display_fields_render', 
+		'cdcrm_settings_page', 
+		'cdcrm_settings_page_section',
+		array( 
+			__( 'If you want to display contacts, select what contact information to display.', 'cdcrm')  
+		) 
+	);
+
+	add_settings_field( 
 		'person_custom', 
 		__( 'Custom Fields', 'cdcrm' ), 
 		'cdcrm_person_custom_render', 
@@ -151,6 +173,51 @@ function cdcrm_person_business_roles_render( $args ) {
 	<?php
 
 }
+
+function cdcrm_person_display_render( $args ) { 
+
+	$options = get_option( 'cdcrm_options' );
+	?>
+	<span class="description"><?php echo $args[0]; ?></span><br />
+	<?php $choices = array(
+		'single' => __( 'Single Business View', 'cdcrm' ),
+		'category' => __( 'Category/Membership Level View', 'cdcrm' ),
+		'shortcode' => __( 'Shortcode View', 'cdcrm' ),
+	);
+	foreach( $choices as $value => $description ) {
+		$checked = false;
+		if( isset( $options['person_display'] ) && in_array( $value, $options['person_display'] ) ) {
+			$checked = true;
+		} ?>
+		<input type='checkbox' name='cdcrm_options[person_display][<?php echo $value; ?>]' id="<?php echo $value; ?>" value='<?php echo $value; ?>' <?php checked( $checked, true, true ); ?>><label for="<?php echo $value; ?>"><?php echo $description; ?></label><br />
+	<?php }
+
+}
+
+function cdcrm_person_display_fields_render( $args ) { 
+
+	$options = get_option( 'cdcrm_options' );
+	?>
+	<span class="description"><?php echo $args[0]; ?></span><br />
+	<?php $choices = array(
+		'title' => __( 'Title', 'cdcrm' ),
+		'prefix' => __( 'Prefix', 'cdcrm' ),
+		'suffix' => __( 'Suffix', 'cdcrm' ),
+		'role' => __( 'Role in the business', 'cdcrm' ),
+		'phone' => __( 'Phone Number(s)', 'cdcrm' ),
+		'email' => __( 'Email Address(es)', 'cdcrm' ),
+		'address' => __( 'Mailing Address', 'cdcrm' )
+	);
+	foreach( $choices as $value => $description ) {
+		$checked = false;
+		if( isset( $options['person_display_fields'] ) && in_array( $value, $options['person_display_fields'] ) ) {
+			$checked = true;
+		} ?>
+		<input type='checkbox' name='cdcrm_options[person_display_fields][<?php echo $value; ?>]' id="<?php echo $value; ?>" value='<?php echo $value; ?>' <?php checked( $checked, true, true ); ?>><label for="<?php echo $value; ?>"><?php echo $description; ?></label><br />
+	<?php }
+
+}
+
 
 function cdcrm_person_custom_render( $args ) { 
 
@@ -281,8 +348,18 @@ function cdcrm_render_form() {
 
 // Sanitize and validate input. 
 function cdcrm_validate_options($input) {
-	$input['person_phone_type'] =  wp_filter_nohtml_kses($input['person_phone_type']); 
-	$input['person_phone_type'] =  wp_filter_nohtml_kses($input['person_phone_type']);
+	// $msg = "<pre>" . print_r($input, true) . "</pre>";
+	// wp_die($msg);
+	if( isset( $input['person_phone_type'] ) ) {
+    	$input['person_phone_type'] = wp_filter_nohtml_kses( $input['person_phone_type'] );
+    }
+    if( isset( $input['person_email_type'] ) ) {
+    	$input['person_email_type'] = wp_filter_nohtml_kses( $input['person_email_type'] );
+    }
+    if( isset( $input['person_business_roles'] ) ) {
+    	$input['person_business_roles'] = wp_filter_nohtml_kses( $input['person_business_roles'] );
+    }
+
 	return $input;
 }
 

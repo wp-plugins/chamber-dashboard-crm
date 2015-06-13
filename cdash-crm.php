@@ -3,7 +3,7 @@
 Plugin Name: Chamber Dashboard CRM
 Plugin URI: http://chamberdashboard.com
 Description: Customer Relationship Management for your Chamber of Commerce
-Version: 1.3
+Version: 1.4
 Author: Morgan Kay
 Author URI: http://wpalchemists.com
 Text Domain: cdcrm

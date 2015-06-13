@@ -109,14 +109,91 @@ function cdcrm_people_shortcode( $atts ) {
 	
 	// Reset Post Data
 	wp_reset_postdata();
-	
-	
-	
-	
 
 	return $output;
 
 }
 add_shortcode( 'chamber_dashboard_people', 'cdcrm_people_shortcode' );
+
+// Display people connected with a business
+function cdcrm_display_connected_people( ) {
+	$contacts = '';
+
+	$options = get_option( 'cdcrm_options' );
+
+	// find connected people
+	$connected = new WP_Query( array(
+	  'connected_type' => 'businesses_to_people',
+	  'connected_items' => get_the_id(),
+	  'nopaging' => true,
+	  'connected_meta' => array( 'Display' => 'Yes' )
+	) );
+
+	// Display connected people
+	if ( $connected->have_posts() ) :
+		$contacts .= '<div id="cdash-contacts"><strong>' . __( 'Contact: ', 'cdcrm' ) . '</strong><br />';
+		while ( $connected->have_posts() ) : $connected->the_post();
+			global $person_metabox;
+			$meta = $person_metabox->the_meta();
+
+			$contacts .= '<p class="cdash-person">';
+			if( isset( $options['person_display_fields']['prefix'] ) && isset( $meta['prefix'] ) && '' !== $meta['prefix'] ) {
+				$contacts .= $meta['prefix'] . '&nbsp;';
+			}
+			$contacts .= get_the_title();
+			if( isset( $options['person_display_fields']['suffix'] ) && isset( $meta['suffix'] ) && '' !== $meta['suffix'] ) {
+				$contacts .= '&nbsp;, ' . $meta['suffix'];
+			}
+			if( isset( $options['person_display_fields']['title'] ) && isset( $meta['title'] ) && '' !== $meta['title'] ) {
+				$contacts .= '<br />' . $meta['title'];
+			}
+			if( isset( $options['person_display_fields']['role'] ) ) {
+				$contacts .= '<br />' . p2p_get_meta( get_post()->p2p_id, 'role', true );
+			}
+			if( isset( $options['person_display_fields']['address'] ) ) {
+				if( isset( $meta['address'] ) && '' !== $meta['address'] ) {
+					$contacts .= '<br />' . $meta['address'] . '<br />';
+				}
+				if( isset( $meta['city'] ) && '' !== $meta['city'] ) {
+					$contacts .= $meta['city'] . ',&nbsp;';
+				}
+				if( isset( $meta['state'] ) && '' !== $meta['state'] ) {
+					$contacts .= $meta['state'] . '&nbsp;';
+				}
+				if( isset( $meta['zip'] ) && '' !== $meta['zip'] ) {
+					$contacts .= $meta['zip'];
+				}
+			}
+			$contacts .= '</p>';
+			if( isset( $options['person_display_fields']['phone'] ) && isset( $meta['phone'] ) ) {
+				$contacts .= cdash_display_phone_numbers( $meta['phone'] );
+			}
+			if( isset( $options['person_display_fields']['email'] ) && isset( $meta['email'] ) ) {
+				$contacts .= cdash_display_email_addresses( $meta['email'] );
+			}
+			
+		endwhile;
+		$contacts .= '</div>';
+	endif;
+	wp_reset_postdata();
+
+	return $contacts;
+}
+
+add_action( 'init', 'cdcrm_check_where_to_display_people' );
+function cdcrm_check_where_to_display_people() {
+	$options = get_option( 'cdcrm_options' );
+	if( isset($options['person_display'] ) ) {
+		if( isset( $options['person_display']['single'] ) ) {
+			add_action( 'cdash_single_business_before_map', 'cdcrm_display_connected_people' );
+		}
+		if( isset( $options['person_display']['category'] ) ) {
+			add_action( 'cdash_end_of_taxonomy_view', 'cdcrm_display_connected_people' );
+		}
+		if( isset( $options['person_display']['shortcode'] ) ) {
+			add_action( 'cdash_end_of_shortcode_view', 'cdcrm_display_connected_people' );
+		}
+	}
+}
 
 ?>
